@@ -10,7 +10,6 @@ dist/
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
 
 # Env / secrets

@@ -1,0 +1,22 @@
+meta {
+  name: Log Habit Day
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/habits/1/logs/2026-09-18
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+body:json {
+  {
+    "completed": true,
+    "notes": "Felt good"
+  }
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Create Habit
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/habits
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+body:json {
+  {
+    "name": "Drink water",
+    "description": "8 glasses a day"
+  }
+}

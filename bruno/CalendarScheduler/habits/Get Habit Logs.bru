@@ -1,0 +1,15 @@
+meta {
+  name: Get Habit Logs
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/habits/1/logs
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
