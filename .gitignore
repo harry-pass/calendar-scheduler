@@ -1,10 +1,10 @@
-# Create repo root .gitignore
-@"
 # General
 .DS_Store
 .vscode/*
 !.vscode/extensions.json
 .idea
+node_modules/
+dist/
 
 # OS
 *.suo
@@ -12,4 +12,11 @@
 *.njsproj
 *.sln
 *.sw?
-"@ | Out-File -Encoding UTF8 .gitignore
+
+# Env / secrets
+*.env
+*.env.local
+appsettings.*.local.json
+
+# Bruno
+bruno/**/*.local.bru
