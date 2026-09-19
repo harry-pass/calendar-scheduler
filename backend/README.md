@@ -15,20 +15,29 @@ ASP.NET Core Web API backend for the habit tracker. EF Core targets Azure SQL Da
    dotnet user-secrets set "Jwt:SigningKey" "<a long random string, 32+ chars>"
    ```
 
-3. Apply migrations to create the schema:
-
-   ```
-   dotnet tool install --global dotnet-ef   # once, if not already installed
-   dotnet ef database update
-   ```
-
-4. Run the API:
+3. Run the API:
 
    ```
    dotnet run
    ```
 
-   Default dev URL: `http://localhost:5207`.
+   Default dev URL: `http://localhost:5207`. In the Development environment, startup
+   automatically applies pending EF Core migrations and seeds a known admin account
+   (`admin@local.test` / `Admin123!`) so you can log in without registering first.
+   Override the seeded credentials with:
+
+   ```
+   dotnet user-secrets set "SeedAdmin:Email" "you@example.com"
+   dotnet user-secrets set "SeedAdmin:Password" "<your password>"
+   ```
+
+   Outside Development (e.g. a real deployment), migrations aren't applied automatically —
+   run them explicitly instead:
+
+   ```
+   dotnet tool install --global dotnet-ef   # once, if not already installed
+   dotnet ef database update
+   ```
 
 ## Adding a new migration after model changes
 

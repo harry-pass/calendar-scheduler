@@ -72,6 +72,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    using var seedScope = app.Services.CreateScope();
+    await DbSeeder.SeedAsync(seedScope.ServiceProvider);
 }
 
 app.UseHttpsRedirection();
