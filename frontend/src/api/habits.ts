@@ -9,6 +9,10 @@ export function createHabit(name: string, description?: string) {
   return apiClient.post<Habit>('/api/habits', { name, description })
 }
 
+export function deleteHabit(habitId: number) {
+  return apiClient.delete<void>(`/api/habits/${habitId}`)
+}
+
 export function getHabitLogs(habitId: number, from?: string, to?: string) {
   const params = new URLSearchParams()
   if (from) params.set('from', from)

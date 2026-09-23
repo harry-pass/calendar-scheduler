@@ -45,6 +45,18 @@ public class HabitsController(AppDbContext db) : ControllerBase
         return CreatedAtAction(nameof(GetHabits), new { id = habit.Id }, response);
     }
 
+    [HttpDelete("{habitId:int}")]
+    public async Task<IActionResult> DeleteHabit(int habitId)
+    {
+        var habit = await db.Habits.FirstOrDefaultAsync(h => h.Id == habitId && h.UserId == CurrentUserId);
+        if (habit is null) return NotFound();
+
+        habit.IsArchived = true;
+        await db.SaveChangesAsync();
+
+        return NoContent();
+    }
+
     [HttpGet("{habitId:int}/logs")]
     public async Task<ActionResult<IEnumerable<HabitLogResponse>>> GetLogs(int habitId, [FromQuery] DateOnly? from, [FromQuery] DateOnly? to)
     {

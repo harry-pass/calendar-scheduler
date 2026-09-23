@@ -60,6 +60,17 @@ export function HabitsPage() {
     }
   }
 
+  async function handleDeleteHabit(habit: HabitWithToday) {
+    if (!confirm(`Delete "${habit.name}"? This can't be undone from the UI.`)) return
+    setHabits((prev) => prev?.filter((h) => h.id !== habit.id) ?? null)
+    try {
+      await habitsApi.deleteHabit(habit.id)
+    } catch {
+      setError('Could not delete that habit.')
+      await loadHabits()
+    }
+  }
+
   return (
     <div className="habits-page">
       <h1>Today's habits</h1>
@@ -89,6 +100,14 @@ export function HabitsPage() {
               />
               {habit.name}
             </label>
+            <button
+              type="button"
+              className="delete-habit"
+              aria-label={`Delete ${habit.name}`}
+              onClick={() => void handleDeleteHabit(habit)}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
